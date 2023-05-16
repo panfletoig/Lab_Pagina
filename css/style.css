@@ -1,0 +1,40 @@
+@import url(https://fonts.googleapis.com/css?family=Rubik:300,regular,500,600,700,800,900,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+*{
+    margin: 0;
+    padding: 0;
+}
+html, body{
+    height: 100%;
+    font-family: 'Rubik';
+}
+h1{
+    text-align: center;
+    padding: 20px 0;
+}
+form, a{
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+input{
+    margin: 10px 0;
+}
+#submit, a{
+    width: 80px;
+}
+a{
+    text-decoration: none;
+    margin-top: 10px;
+}
+section{
+    text-align: center;
+}
+table{
+    text-align: center;
+    margin: 10px auto;
+}
+td{
+    padding: 0 10px;
+}
