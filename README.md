@@ -17,3 +17,49 @@
     Mario Mendoza 0900-23-15699 <br>
     </p>
 </div>
+
+<details>
+  <summary>Archivos</summary>
+  <ol>
+    <li>
+      /BD/
+      <ul>
+        <li>register.php</li>
+        <li>user.php</li>
+      </ul>
+    </li>
+    <li>
+      /css/
+      <ul>
+        <li>style.css</li>
+      </ul>
+    </li>    
+    <li>
+      /html/
+      <ul>
+        <li>mainInventario.php</li>
+        <li>registro.html</li>
+      </ul>
+    </li>  
+    <li>
+      /js/
+      <ul>
+        <li>User.js</li>
+      </ul>
+    </li> 
+    <li>
+      /sqlite/
+      <ul>
+        <li>usuario.db</li>
+      </ul>
+    </li>  
+    <li>
+      /template/
+      <ul>
+        <li>class.php</li>
+      </ul>
+    </li>   
+    <li>Index.html</li>
+    <li>README.md</li>
+  </ol>
+</details>
