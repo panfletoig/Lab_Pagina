@@ -22,44 +22,44 @@
   <summary>Archivos</summary>
   <ol>
     <li>
-      <a href="/bd">BD</a>
+      <a href="/bd">PHP</a>
       <ul>
         <li>register.php</li>
         <li>user.php</li>
       </ul>
     </li>
     <li>
-      css
+      <a href="/css">CSS</a>
       <ul>
         <li>style.css</li>
       </ul>
     </li>    
     <li>
-      html
+      <a href="/html">Html</a>
       <ul>
         <li>mainInventario.php</li>
         <li>registro.html</li>
       </ul>
     </li>  
     <li>
-      js
+      <a href="/js">Js</a>
       <ul>
         <li>User.js</li>
       </ul>
     </li> 
     <li>
-      sqlite
+      <a href="/sqlite">Base de datos</a>
       <ul>
         <li>usuario.db</li>
       </ul>
     </li>  
     <li>
-      template
+      <a href="/template">Template php</a>
       <ul>
         <li>class.php</li>
       </ul>
     </li>   
-    <li>Index.html</li>
-    <li>README.md</li>
+    <li><a href="/">Index.html</a></li>
+    <li><a href="/">README.md</a></li>
   </ol>
 </details>
