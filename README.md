@@ -1,8 +1,19 @@
 <a name="readme-top"></a>
 
 <br />
-<div align="https://umg.edu.gt">
-    <a href="">
-        <img src="https://scontent.fgua3-4.fna.fbcdn.net/v/t39.30808-6/302153921_521665023098466_3820671300471788925_n.png?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=UTsaQrJf2pwAX-HEgt6&_nc_ht=scontent.fgua3-4.fna&oh=00_AfBsuNMeJjFGRT12t1X6DpIuCbY4hQsNfDsks0LrdUuL2Q&oe=646A0E2A">
+<div align="center">
+    <a href="https://umg.edu.gt">
+        <img src="https://umg.edu.gt/assets/umg.png">
     </a>
+    <h3 align="center">Proyecto grupal inventario de empresa</h3>
+    <p align="center">
+    Introducción a los sistemas de computo<br>
+    Profesor<br>
+    Erick Aguilar<br><br>
+    Integrantes <br>
+    Carlos Interiano - 0900-23-1399 <br>
+    Gabriel Alfaro 0900-23-10552 <br>
+    Julio Uyú 0900-23-17139 <br>
+    Mario Mendoza 0900-23-15699 <br>
+    </p>
 </div>
