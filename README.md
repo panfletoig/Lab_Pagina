@@ -22,39 +22,39 @@
   <summary>Archivos</summary>
   <ol>
     <li>
-      /BD/
+      <a href="main/bd">BD</a>
       <ul>
         <li>register.php</li>
         <li>user.php</li>
       </ul>
     </li>
     <li>
-      /css/
+      css
       <ul>
         <li>style.css</li>
       </ul>
     </li>    
     <li>
-      /html/
+      html
       <ul>
         <li>mainInventario.php</li>
         <li>registro.html</li>
       </ul>
     </li>  
     <li>
-      /js/
+      js
       <ul>
         <li>User.js</li>
       </ul>
     </li> 
     <li>
-      /sqlite/
+      sqlite
       <ul>
         <li>usuario.db</li>
       </ul>
     </li>  
     <li>
-      /template/
+      template
       <ul>
         <li>class.php</li>
       </ul>
