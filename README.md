@@ -22,7 +22,7 @@
   <summary>Archivos</summary>
   <ol>
     <li>
-      <a href="main/bd">BD</a>
+      <a href="/bd">BD</a>
       <ul>
         <li>register.php</li>
         <li>user.php</li>
