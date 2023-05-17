@@ -1,12 +1,13 @@
 <?php
-    class BaseDatos extends SQLite3{
-        function __construct(){
-            $this->open("..\sqlite\productos.db");
-        }
-    }
+    //referencia a un archivo que contiene la clase base de datos
+    include('../template/class.php');
+
+    /*
+    $option: Toma la opcion seleccionada y si no hay nada la vuelve nula
+    $db: instancia la base de datos
+    */
 
     $option = $_POST['selectOption'] ?? null;
-
     $db = new BaseDatos();
 ?>
 
@@ -39,24 +40,34 @@
         <section>
             <table>
                 <?php
+                    //detecta si se conecto a la base de datos
                     if ($db) {
                         echo "<p>Conectado a inventario</p>";
                     } else{
                         echo "<p>Error al intentar abrir inventario</p>";
                     }
                     
+                    //si es none toma todos los datos y si no lo es toma solo los de la opcion
                     if($option != "none")
-                        $result = $db->query("SELECT * FROM Test WHERE id_producto = '$option'");
+                        $result = $db->query("SELECT * FROM Productos WHERE id_producto = '$option'");
                     else
-                        $result = $db->query("SELECT * FROM Test");
+                        $result = $db->query("SELECT * FROM Productos");
 
+                    /* 
+                    $a: contador para organizar en filas y columnas
+                    $b: numero de columnas
+
+                    mientras que el while se encarga de pasar por cada campo
+                    comprobando en donde le toca ir a cada campo
+                    */
                     $a = 0;
+                    $b = 3;
                     while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
                         foreach($row as $rows){
                             if($a == 0){
                                 echo "<tr>";
                             }
-                            if($a == 3){
+                            if($a == $b){
                                 echo "</tr>";
                                 $a = 0;
                             }
