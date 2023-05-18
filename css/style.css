@@ -38,8 +38,10 @@ table{
 td{
     padding: 0 10px;
 }
-
-#a_admin{
+#a_admin, #close{
     text-decoration: none;
     margin: 0 0 0 auto;
+}
+#f_btn{
+    width: 100%;
 }

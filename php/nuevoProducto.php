@@ -10,7 +10,10 @@
     $textDescripcion = $_POST['descripcion'] ?? null;
     $selectEstado = $_POST['selectEstado'] ?? null;
     $selectMarca = $_POST['selectMarca'] ?? null;
-    $selectUbicacion = $_POST['selectUbicacion'] ?? null;
+    $selectUbicacion = $_POST['selectUbicación'] ?? null;
+
+    $nombreMarca = $_POST['nombreMarca'] ?? null;
+    $nombreUbicacion = $_POST['nombreUbicacion'] ?? null;
 
     $revisar = $db->querySingle("SELECT pass FROM Usuario WHERE email = '$emailSession'");
 ?>
@@ -26,34 +29,107 @@
 <body>
     <header>
         <div id=btn_admin><a href=mainInventario.php id=a_admin><button>Volver</button></a></div>
-        <h1>Agregar producto</h1>
+        <h1>Agregar</h1>
     </header>
     <main>
         <section>
+            <h2>Producto:</h2>
             <?php
                 if(!password_verify($passSession, $revisar)){
-                    echo "<h4>Session termino, vuelve a ingresar</h4>";
+                    echo "<p>Session termino, vuelve a ingresar</p>";
+                    echo "<a href=../index.html><button>Iniciar Session</button></a>";
                 }
                 else{
                     $estadoSelect = $db->query("SELECT * FROM Estado");
                     $marcaSelect = $db->query("SELECT * FROM Marca");
                     $bodegaSelect = $db->query("SELECT * FROM Bodega");
                     //creamos un form
-                    echo "<form method=post action=nuevoProducto.php>";
-                    //llamamos a funciones que crean los select
-                    echo "<h3>Nombre:</h3><input type=text placeholder=Nombre name=nombre>";
-                    echo "<h3>Descripción:</h3><input type=text placeholder=Descripción name=descripcion>";
+                    echo "
+                    <form method=post action=nuevoProducto.php>
+                    <h3>Nombre:</h3>
+                    <input type=text placeholder=Nombre name=nombre required autocomplete=off>
+                    <h3>Descripción:</h3>
+                    <input type=text placeholder=Descripción name=descripcion required autocomplete=off>";
                     select("Estado", $estadoSelect, 2, 1);
                     select("Marca", $marcaSelect, 2, 1);
                     select("Ubicación", $bodegaSelect, 2, 1);
-                    echo "<input type=submit value='Agregar'></form>";
+                    echo "<input type=submit value='Agregar' name='agregarProducto'></form>";
 
-                    if($selectUbicacion != '0' && $marcaSelect != '0' && $selectEstado != '0' && $textNombre != '' && $textDescripcion != ''){
-                        $db->exec("INSERT INTO Productos (nombre, descripcion, id_estado, id_marca, id_bodega) VALUES ('$textNombre', '$textDescripcion', '$selectEstado', '$selectMarca', '$selectUbicacion')");
+                    if(isset($_REQUEST['agregarProducto'])){
+                        $bool = ($selectUbicacion != '0' && $marcaSelect != '0' && $selectEstado != '0' && $textNombre != '' && $textDescripcion != '') == true ? true : false;
+                        /*$nombreExiste = $db->querySingle("SELECT EXISTS(SELECT nombre from Productos WHERE nombre = '$textNombre')");
+                        $descripcionExiste = $db->querySingle("SELECT descripcion from Productos WHERE nombre = '$textNombre'");
+                        $id_estadoExiste = $db->querySingle("SELECT id_estado from Productos WHERE nombre = '$textNombre'");
+                        $id_marcaExiste = $db->querySingle("SELECT EXISTS(SELECT id_marca from Productos WHERE nombre = '$textNombre'");
+                        $id_bodegaExiste = $db->querySingle("SELECT EXISTS(SELECT id_bodega from Productos WHERE nombre = '$textNombre'");
+                        
+                        echo "$nombreExiste <br> 
+                        $descripcionExiste <br>
+                        $id_estadoExiste <br>
+                        $id_marcaExiste <br>
+                        $id_bodegaExiste <br>";
+                        
+                        if($bool && ($nombreExiste != $textNombre || $descripcionExiste != $textDescripcion || $id_estadoExiste != $estadoSelect || $id_marcaExiste != $marcaSelect || $id_bodegaExiste != $bodegaSelect)){
+                            $db->exec("INSERT INTO Productos (nombre, descripcion, id_estado, id_marca, id_bodega) VALUES ('$textNombre', '$textDescripcion', '$selectEstado', '$selectMarca', '$selectUbicacion')");
+                            echo "<p>Producto añadido</p>";
+                        }*/
+
+                        if($bool){
+                            $db->exec("INSERT INTO Productos (nombre, descripcion, id_estado, id_marca, id_bodega) VALUES ('$textNombre', '$textDescripcion', '$selectEstado', '$selectMarca', '$selectUbicacion')");
+                        }
+                        else if($selectUbicacion == '0'){
+                            echo "<p>Campo ubicación vacio</p>";
+                        }
+                        else if($marcaSelect == '0'){
+                            echo "<p>Campo marca vacio</p>";
+                        }
+                        else if($selectEstado == '0'){
+                            echo "<p>Campo estado vacio</p>";
+                        }
+                        else if(($nombreExiste == $textNombre && $descripcionExiste == $textDescripcion && $id_estadoExiste == $estadoSelect && $id_marcaExiste == $marcaSelect && $id_bodegaExiste == $bodegaSelect))
+                        echo "<p>Este producto ya existe</p>";
                     }
-                    else if($selectUbicacion == '0' || $marcaSelect == '0' || $selectEstado == '0' || $textNombre == '' || $textDescripcion == ''){
-                        echo "Faltan valores en los campos";
+                }
+            ?>
+        </section>
+        <section>
+            <h2>Marca:</h2>
+            <?php
+                if(password_verify($passSession, $revisar)){
+                    echo "
+                    <form method=post action=nuevoProducto.php>
+                    <h3>Nombre:</h3>
+                    <input type=text placeholder=Nombre Marca name=nombreMarca required autocomplete=off>
+                    <input type=submit value=Agregar name='agregarMarca' autocomplete=off>
+                    </form>";
+                    $existe = $db->querySingle("SELECT EXISTS(SELECT * from Marca WHERE marca = '$nombreMarca')");
+                    if($nombreMarca != '' && isset($_REQUEST['agregarMarca']) && $existe != 1){
+                        $db->exec("INSERT INTO Marca (marca) VALUES ('$nombreMarca')");
+                        echo "<p>Marca: $nombreMarca fue añadido</p>";
                     }
+                    else if($existe == 1)
+                        echo "<p>Esta marca ya existe</p>";
+                }
+            ?>
+        </section>
+        <section>
+            <h2>Ubicación:</h2>
+            <?php
+                if(password_verify($passSession, $revisar)){
+                    echo "
+                    <form method=post action=nuevoProducto.php>
+                    <h3>Nombre:</h3>
+                    <input type=text placeholder=Ubicación name=nombreUbicacion required autocomplete=off>
+                    <input type=submit value=Agregar name='agregarUbicacion' autocomplete=off>
+                    </form>";
+
+                    $existe = $db->querySingle("SELECT EXISTS(SELECT * from Bodega WHERE ubicacion = '$nombreUbicacion')");
+                    if($nombreUbicacion != '' && isset($_REQUEST['agregarUbicacion']) && $existe != 1){
+                        $db->exec("INSERT INTO Bodega (ubicacion) VALUES ('$nombreUbicacion')");
+                        echo "<p>Ubicacion: $nombreUbicacion fue añadido</p>";
+                    }
+                    else if($existe == 1)
+                        echo "<p>Esta ubicacion ya existe</p>";
                 }
             ?>
         </section>

@@ -50,7 +50,7 @@
                 <label>Repetir Contraseña</label>
                 <input type="password" name="repetirUsuario" placeholder="Contraseña" required>
                 <label>Codigo</label>
-                <input type="text" name="codeUsuario" placeholder="Codigo" required>
+                <input type="text" name="codeUsuario" placeholder="Codigo" required autocomplete="off">
                 <input id="submit" type="submit" value="Enviar">
             </form>
         </section>

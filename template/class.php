@@ -39,7 +39,6 @@
                 }
                 if($temporal % $bb == $comparacion){
                     echo "$id</option>";
-                    $c++;
                 }
                 $temporal++;
             }

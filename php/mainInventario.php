@@ -12,7 +12,7 @@
     $selectId = $_POST['selectId'] ?? null;
     $selectEstado = $_POST['selectEstado'] ?? null;
     $selectMarca = $_POST['selectMarca'] ?? null;
-    $selectUbicacion = $_POST['selectUbicacion'] ?? null;
+    $selectUbicacion = $_POST['selectUbicación'] ?? null;
     $db = new BaseDatos();
 
     session_start();
@@ -36,12 +36,11 @@
     <header>
         <?php
         if($nivel == 1){
-            echo "<div id=btn_admin>
-            <a href=admin.php id=a_admin><button>Panel de administrador</button></a>
-            <a href=nuevoProducto.php id=a_admin><button>Agregar Producto</button></a>
-            </div>";
+            echo "<a href=admin.php id=a_admin><button>Panel de administrador</button></a>";
         }
         ?>
+        <a href=nuevoProducto.php id=a_admin><button>Agregar Producto</button></a>
+        <form action="mainInventario.php" method="post" id="f_btn"><input type="submit" value="Cerrar sesión" name="close" id="close"></form>
         <h1>Inventario</h1>
     </header>
     <main>
@@ -189,6 +188,11 @@
                     echo "<p>seccion cerrada</p>";
                     echo "<p>Vuelve a iniciar seccion</p>";
                     echo "<a href=../index.html><button>Iniciar Session</button></a>";
+                }
+
+                if(isset($_REQUEST['close'])){
+                    session_destroy();
+                    echo '<meta http-equiv="refresh" content="0; url=../index.html" />';
                 }
             ?>         
         </section>
