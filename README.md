@@ -24,39 +24,39 @@
     <li>
       <a href="/bd">PHP</a>
       <ul>
-        <li>register.php</li>
-        <li>user.php</li>
+        <li><a href="/bd/register.php">register.php</a></li>
+        <li><a href="/bd/user.php">user.php</a></li>
       </ul>
     </li>
     <li>
       <a href="/css">CSS</a>
       <ul>
-        <li>style.css</li>
+        <li><a href="/css/style.css">style.css</a></li>
       </ul>
     </li>    
     <li>
       <a href="/html">Html</a>
       <ul>
-        <li>mainInventario.php</li>
-        <li>registro.html</li>
+        <li><a href="/html/mainInventario.php">mainInventario.php</a></li>
+        <li><a href="/html/registro.html">registro.html</a></li>
       </ul>
     </li>  
     <li>
       <a href="/js">Js</a>
       <ul>
-        <li>User.js</li>
+        <li><a href="/js/User.js">User.js</a></li>
       </ul>
     </li> 
     <li>
       <a href="/sqlite">Base de datos</a>
       <ul>
-        <li>usuario.db</li>
+        <li><a href="/sqlite/usuario.db">usuario.db</a></li>
       </ul>
     </li>  
     <li>
       <a href="/template">Template php</a>
       <ul>
-        <li>class.php</li>
+        <li><a href="/template/class.php">class.php</a></li>
       </ul>
     </li>   
     <li><a href="/">Index.html</a></li>
