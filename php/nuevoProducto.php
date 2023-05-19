@@ -11,6 +11,8 @@
     $selectEstado = $_POST['selectEstado'] ?? null;
     $selectMarca = $_POST['selectMarca'] ?? null;
     $selectUbicacion = $_POST['selectUbicación'] ?? null;
+    $selectModelo = $_POST['selectModelo'] ?? null;
+    $selectSerial = $_POST['serial'] ?? null;
 
     $nombreMarca = $_POST['nombreMarca'] ?? null;
     $nombreUbicacion = $_POST['nombreUbicacion'] ?? null;
@@ -40,6 +42,7 @@
                     echo "<a href=../index.html><button>Iniciar Session</button></a>";
                 }
                 else{
+                    $productoSelect = $db->query("SELECT * FROM Productos");
                     $estadoSelect = $db->query("SELECT * FROM Estado");
                     $marcaSelect = $db->query("SELECT * FROM Marca");
                     $bodegaSelect = $db->query("SELECT * FROM Bodega");
@@ -50,35 +53,27 @@
                     <input type=text placeholder=Nombre name=nombre required autocomplete=off>
                     <h3>Descripción:</h3>
                     <input type=text placeholder=Descripción name=descripcion required autocomplete=off>";
-                    select("Estado", $estadoSelect, 2, 1);
-                    select("Marca", $marcaSelect, 2, 1);
-                    select("Ubicación", $bodegaSelect, 2, 1);
+                    select("Estado", $estadoSelect, 2, 1, 0);
+                    select("Modelo", $productoSelect, 8, 3, 1);
+                    echo "<h3>Serial:</h3><input type=text placeholder=Serial name=serial required autocomplete=off>";
+                    select("Marca", $marcaSelect, 2, 1, 0);
+                    select("Ubicación", $bodegaSelect, 2, 1, 0);
                     echo "<input type=submit value='Agregar' name='agregarProducto'></form>";
 
                     if(isset($_REQUEST['agregarProducto'])){
-                        $bool = ($selectUbicacion != '0' && $marcaSelect != '0' && $selectEstado != '0' && $textNombre != '' && $textDescripcion != '') == true ? true : false;
-                        /*$nombreExiste = $db->querySingle("SELECT EXISTS(SELECT nombre from Productos WHERE nombre = '$textNombre')");
-                        $descripcionExiste = $db->querySingle("SELECT descripcion from Productos WHERE nombre = '$textNombre'");
-                        $id_estadoExiste = $db->querySingle("SELECT id_estado from Productos WHERE nombre = '$textNombre'");
-                        $id_marcaExiste = $db->querySingle("SELECT EXISTS(SELECT id_marca from Productos WHERE nombre = '$textNombre'");
-                        $id_bodegaExiste = $db->querySingle("SELECT EXISTS(SELECT id_bodega from Productos WHERE nombre = '$textNombre'");
-                        
-                        echo "$nombreExiste <br> 
-                        $descripcionExiste <br>
-                        $id_estadoExiste <br>
-                        $id_marcaExiste <br>
-                        $id_bodegaExiste <br>";
-                        
-                        if($bool && ($nombreExiste != $textNombre || $descripcionExiste != $textDescripcion || $id_estadoExiste != $estadoSelect || $id_marcaExiste != $marcaSelect || $id_bodegaExiste != $bodegaSelect)){
-                            $db->exec("INSERT INTO Productos (nombre, descripcion, id_estado, id_marca, id_bodega) VALUES ('$textNombre', '$textDescripcion', '$selectEstado', '$selectMarca', '$selectUbicacion')");
-                            echo "<p>Producto añadido</p>";
-                        }*/
+                        $comprobar =  $db->querySingle("SELECT EXISTS(SELECT * from Productos WHERE serializado = '$selectSerial')");
+                        $bool = (($selectUbicacion != "0" && $marcaSelect != "0" && $selectEstado != "0" && $textNombre != '' && $textDescripcion != '' && $selectModelo != "0" && $selectSerial != '') && $comprobar == 0) == true ? true : false;
+
 
                         if($bool){
-                            $db->exec("INSERT INTO Productos (nombre, descripcion, id_estado, id_marca, id_bodega) VALUES ('$textNombre', '$textDescripcion', '$selectEstado', '$selectMarca', '$selectUbicacion')");
+                            $db->exec("INSERT INTO Productos (nombre, descripcion, modelo, serializado, id_estado, id_marca, id_bodega) VALUES ('$textNombre', '$textDescripcion', '$selectModelo', '$selectSerial', '$selectEstado', '$selectMarca', '$selectUbicacion')");
+                            echo "<p>Producto: $textNombre agregado</p>";
                         }
                         else if($selectUbicacion == '0'){
                             echo "<p>Campo ubicación vacio</p>";
+                        }
+                        else if($comprobar == 1){
+                            echo "<p>El serial ya existe</p>";
                         }
                         else if($marcaSelect == '0'){
                             echo "<p>Campo marca vacio</p>";

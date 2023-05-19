@@ -25,7 +25,7 @@
     la variable temporal volviendo a ciclar, cuando acaba el ciclo
     cerramos el select
     */
-    function select($nombreIdentificador, $select, $bb, $comparacion)
+    function select($nombreIdentificador, $select, $bb, $comparacion, $casoEspecial)
     {
         echo "</select>
         <h3>$nombreIdentificador:</h3>
@@ -35,10 +35,23 @@
             $temporal = 0;
             foreach($ids as $id){
                 if($temporal % $bb == 0){
-                    echo "<option value=$id>";
+                    switch($casoEspecial){
+                        case 1:
+                            break;
+                        default:
+                            echo "<option value=$id>";
+                            break;
+                    }
                 }
-                if($temporal % $bb == $comparacion){
-                    echo "$id</option>";
+                if(($temporal % $bb == $comparacion)){
+                    switch($casoEspecial){
+                        case 1:
+                            echo "<option value=$id>$id</option>";
+                            break;
+                        default:
+                            echo "$id</option>";
+                            break;
+                    }
                 }
                 $temporal++;
             }
