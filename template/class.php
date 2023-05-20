@@ -6,7 +6,7 @@
     */
     class BaseDatos extends SQLite3{
         function __construct(){
-            $this->open("..\sqlite\usuario.db");
+            $this->open("usuario.db");
         }
     }
 
@@ -25,33 +25,28 @@
     la variable temporal volviendo a ciclar, cuando acaba el ciclo
     cerramos el select
     */
-    function select($nombreIdentificador, $select, $bb, $comparacion, $casoEspecial)
+    function select($nombreIdentificador, $select, $bb, $comparacion, $casoEspecial, $opcion)
     {
         echo "</select>
         <h3>$nombreIdentificador:</h3>
-        <select name=select$nombreIdentificador id=select>
-        <option value=0>Todos</option>";
+        <select name=select$nombreIdentificador id=select>";
+
+        if($opcion == false)
+        echo "<option value=0>Todos</option>";
+        else
+        echo "<option value=0>Elige una opción</option>";
         while($ids = $select->fetchArray(SQLITE3_ASSOC)){
             $temporal = 0;
             foreach($ids as $id){
                 if($temporal % $bb == 0){
-                    switch($casoEspecial){
-                        case 1:
-                            break;
-                        default:
-                            echo "<option value=$id>";
-                            break;
-                    }
+                    if($casoEspecial != 1)
+                        echo "<option value=$id>";
                 }
                 if(($temporal % $bb == $comparacion)){
-                    switch($casoEspecial){
-                        case 1:
-                            echo "<option value=$id>$id</option>";
-                            break;
-                        default:
-                            echo "$id</option>";
-                            break;
-                    }
+                    if($casoEspecial == 1)
+                        echo "<option value=$id>$id</option>";
+                    else
+                        echo "$id</option>";
                 }
                 $temporal++;
             }

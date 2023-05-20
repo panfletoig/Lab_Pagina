@@ -45,3 +45,25 @@ td{
 #f_btn{
     width: 100%;
 }
+#div_create{
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+#div_create *{
+    width: auto;
+    margin: 0 10px;
+    vertical-align: middle;
+    text-decoration: solid blue;
+}
+#div_btn, #div_btn form{
+    width: auto;
+    direction: ltr;
+    display: flex;
+    justify-content: flex-end;
+}
+#div_btn > * , #div_btn input{
+    margin: 0;
+    width: 200px;
+}

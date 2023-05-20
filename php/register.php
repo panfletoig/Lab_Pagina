@@ -49,9 +49,9 @@
                 <input type="password" name="passUsuario" placeholder="Contraseña" required>
                 <label>Repetir Contraseña</label>
                 <input type="password" name="repetirUsuario" placeholder="Contraseña" required>
-                <label>Codigo</label>
-                <input type="text" name="codeUsuario" placeholder="Codigo" required autocomplete="off">
-                <input id="submit" type="submit" value="Enviar">
+                <label>Código</label>
+                <input type="text" name="codeUsuario" placeholder="Código" required autocomplete="off">
+                <input id="submit" type="submit" value="Registrarse">
             </form>
         </section>
         <section>
@@ -91,7 +91,7 @@
                                         }
                                         else{
                                             $db->exec("UPDATE Usuario SET email = '$email', nombre = '$name', pass = '$pass' WHERE code = '$code';");
-                                            echo '<meta http-equiv="refresh" content="0; url=../index.html" />';
+                                            echo '<meta http-equiv="refresh" content="0; url=../login.html" />';
                                         }
                                     }
                                 }
@@ -104,10 +104,8 @@
                     echo "<p>El codigo ingresado es incorrecto o inexistente</p>";
             ?>
         </section>
-        <section>
-            <a href="../index.html">
-                <button>volver</button>
-            </a>
+        <section id="div_create">
+            <p>Ya tengo una cuenta: </p><a href="../login.html"> Iniciar sesión</a>
         </section>
     </main>
 </body>
@@ -120,7 +118,7 @@
     }
     //funcion que comprueba que los caracteres usados esten en los caracteres permitidos
     function validarNombre($str){
-        $permitidos = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáÁéÉíÍóÓúÚñÑ";
+        $permitidos = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáÁéÉíÍóÓúÚñÑ ";
         for ($i=0; $i<strlen($str); $i++){
             if (strpos($permitidos, substr($str,$i,1))===false){
                return false;

@@ -48,7 +48,7 @@
                     echo "<h4>Acceso Denegado</h4>";
                 }
                 //crea un boton para regresar a index.html
-                echo "<a href=../index.html><button>volver</button></a>";
+                echo "<a href=../login.html><button>Volver</button></a>";
             ?>
         </section>
     </main>

@@ -36,13 +36,19 @@
 </head>
 <body>
     <header>
-        <?php
-        if($nivel == 1){
-            echo "<a href=admin.php id=a_admin><button>Panel de administrador</button></a>";
-        }
-        ?>
-        <a href=nuevoProducto.php id=a_admin><button>Agregar Producto</button></a>
-        <form action="mainInventario.php" method="post" id="f_btn"><input type="submit" value="Cerrar sesión" name="close" id="close"></form>
+        <div id="div_btn">
+            <?php
+            if(password_verify($passSession, $revisar)){
+                if($nivel == 1){
+                    echo "<a href=admin.php id=a_admin><button>Panel de administrador</button></a>";
+                }
+                echo "<a href=nuevoProducto.php id=a_admin><button>Agregar Producto</button></a>";
+                echo "<a href=estado.php id=a_admin><button>Actualizar Estado</button></a>";
+                echo "<form action=mainInventario.php method=post id=f_btn><input type=submit value='Cerrar sesión' name=close id=close></form>";
+            }
+            ?>       
+        </div>
+        
         <h1>Inventario</h1>
     </header>
     <main>
@@ -54,7 +60,8 @@
 
                     //detecta si se conecto a la base de datos
                     if ($db) {
-                        echo "<p>Conectado a inventario</p>";
+                        $nombre = $db->querySingle("SELECT nombre FROM Usuario WHERE email = '$emailSession'");
+                        echo "<p>Bienvenido $nombre</p>";
                     } else{
                         echo "<p>Error al intentar abrir inventario</p>";
                     }
@@ -303,17 +310,18 @@
                     $estadoSelect = $db->query("SELECT * FROM Estado");
                     $marcaSelect = $db->query("SELECT * FROM Marca");
                     $bodegaSelect = $db->query("SELECT * FROM Bodega");
+                    $modeloSelect = $db->query("SELECT * From Modelo");
                     
                     
                     //creamos un form
                     echo "<form method=post action=mainInventario.php>";
                     //llamamos a funciones que crean los select
-                    select("ID", $result, $b, 0, 0);
-                    select("Estado", $estadoSelect, 2, 1, 0);
-                    select("Marca", $marcaSelect, 2, 1, 0);
-                    select("Ubicación", $bodegaSelect, 2, 1, 0);
-                    select("Modelo", $result, $b, 3, 1);
-                    select("Serial", $result, $b, 4, 1);
+                    select("Serial", $result, $b, 0, 0, false);
+                    select("Estado", $estadoSelect, 2, 1, 0, false);
+                    select("Marca", $marcaSelect, 2, 1, 0, false);
+                    select("Ubicación", $bodegaSelect, 2, 1, 0, false);
+                    select("Modelo", $modeloSelect, 2, 1, 0, false);
+                    //select("Serial", $result, $b, 0, 1, false);
                     echo "<input type=submit value='Actualizar tabla'></form>";
                     
                     /* 
@@ -323,14 +331,14 @@
                     */
                     echo "<table>";
                     echo "<tr>
-                    <td>ID:</td>
-                    <td>Nombre:</td>
-                    <td>Descripción: </td>
-                    <td>Modelo:</td>
                     <td>Serial:</td>
+                    <td>Nombre:</td>
+                    <td>Descripción:</td>
+                    <td>Modelo:</td>
                     <td>Estado:</td>
                     <td>Marca:</td>
-                    <td>Ubicación:  </td>
+                    <td>Ubicación:</td>
+                    <td>Fecha salida:</td>
                     </tr>";
 
                     while ($row = $productosSelect->fetchArray(SQLITE3_ASSOC)) {
@@ -339,15 +347,19 @@
                                 case 0:
                                     echo "<tr>";
                                     break;
-                                case 5:
+                                case 3:
+                                    $modeloSelect = $db->querySingle("SELECT modelo FROM Modelo WHERE id_modelo = '$rows'");
+                                    echo "<td>$modeloSelect</td>";
+                                    break;
+                                case 4:
                                     $estadoSelect = $db->querySingle("SELECT estado FROM Estado WHERE id_estado = '$rows'");
                                     echo "<td>$estadoSelect</td>";
                                     break;
-                                case 6:
+                                case 5:
                                     $marcaSelect = $db->querySingle("SELECT marca FROM Marca WHERE id_marca = '$rows'");
                                     echo "<td>$marcaSelect</td>";
                                     break;
-                                case 7:
+                                case 6:
                                     $bodegaSelect = $db->querySingle("SELECT ubicacion FROM Bodega WHERE id_bodega = '$rows'");
                                     echo "<td>$bodegaSelect</td>";
                                     break;
@@ -356,7 +368,7 @@
                                     $a = 0;
                                     break;
                             }
-                            if($a != 5 && $a != 6 && $a != 7){
+                            if($a != 3 && $a != 4 && $a != 5 && $a != 6){
                                 echo "<td>$rows</td>";
                             }
                             $a++;
@@ -368,12 +380,12 @@
                     echo "<p>Lo sentimos :c</p>";
                     echo "<p>seccion cerrada</p>";
                     echo "<p>Vuelve a iniciar seccion</p>";
-                    echo "<a href=../index.html><button>Iniciar Session</button></a>";
+                    echo "<a href=../login.html><button>Iniciar Session</button></a>";
                 }
 
                 if(isset($_REQUEST['close'])){
                     session_destroy();
-                    echo '<meta http-equiv="refresh" content="0; url=../index.html" />';
+                    echo '<meta http-equiv="refresh" content="0; url=../login.html" />';
                 }
             ?>         
         </section>

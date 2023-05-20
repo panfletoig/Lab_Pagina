@@ -28,10 +28,7 @@
     <main>
         <section>
             <?php
-                if($nivel != 1 && !password_verify($passSession, $revisar)){
-                    echo "<h4>No deberias estar aqui :/</h4>";
-                }
-                else{
+                if(password_verify($passSession, $revisar) && $nivel == 1){
                     $result = $db->query("SELECT * FROM Usuario");
 
                     echo "<table>";
@@ -72,7 +69,7 @@
                     echo "<br><h3>Generar codigo para trabajador</h3>";
                     echo "<form method=post><input type=submit name=generar value='Generar codigo para trabajador'></form>";
 
-                    echo "<br><h3>Generar codigo para trabajador</h3>";
+                    echo "<br><h3>Generar codigo para administrador</h3>";
                     echo "<form method=post><input type=submit name=generarA value='Generar codigo para administrador'></form>";
 
                     
@@ -115,6 +112,9 @@
                         $db->exec("DELETE FROM Usuario WHERE id_usuario = $selectId");
                         echo '<meta http-equiv="refresh" content="0; url=admin.php" />';
                     }
+                }
+                else{
+                    echo "<h4>No deberias estar aqui :/</h4>";
                 }
             ?>
         </section>
