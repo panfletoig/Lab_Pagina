@@ -44,6 +44,7 @@
                 }
                 echo "<a href=nuevoProducto.php id=a_admin><button>Agregar Producto</button></a>";
                 echo "<a href=estado.php id=a_admin><button>Actualizar Estado</button></a>";
+                echo "<a href=delete.php id=a_admin><button>Eliminar Producto</button></a>";
                 echo "<form action=mainInventario.php method=post id=f_btn><input type=submit value='Cerrar sesión' name=close id=close></form>";
             }
             ?>       
