@@ -14,22 +14,66 @@
     <header>
         <h1>Ingreso Introduccion a sistemas de computo</h1>
     </header>
+    
     <main>
         <!--Section que contiene el form de la base de datos-->
-        <section>
-            <form action="php/user.php" id="form" method="post">
-                <label>Correo</label>
-                <input type="text"  name="username" id="username" placeholder="Correo" required></input>
-                <label>Contraseña</label>
-                <input type="password" name="password" id="password" placeholder="Contraseña" autocomplete="off" required></input>
-                <input type="submit" id="submit" value="Entrar"></input>
-            </form>
-        </section>
+        <img class="wave" src="img/wave.png" alt="wave">
+
+        <div class="container">
+
+            <div class="img">
+                <img src="img/programming.svg" alt="programming">
+            </div>
+
+            <div class="login-content">
+                <form action="php/user.php" id="form" method="post">
+                    <img src="img/avatar.svg" alt="avatar">
+                    <h2 class="title">Bienvenido</h2>
+                    
+                    <div class="input-div user">
+                        <div class="i">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+
+                        <div class="div">
+                            <input type="text"  name="username" id="username" placeholder="Usuario" required></input>
+                        </div>
+                        
+                    </div>
+    
+                    
+                    <div class="input-div pass">
+        
+                        <div class="i">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+
+                        <div class="div">
+                            <input type="password" name="password" id="password" placeholder="Contraseña" autocomplete="off" required></input>
+                        </div>
+                        
+                    </div>
+
+                    <div class="registro">
+                        <a href="php/register.php" alt="Boton para registrarse">Crea una Cuenta</a>
+                    </div>
+                    
+                    <input class="btn" type="submit" id="submit" value="Entrar"></input>
+                    
+                    
+                </form>
+            </div>
+        </div>
+
+        
 
         <!--Section con botton que redirecciona al la pagina de registro-->
-        <section id="div_create">
-            <p>Crea una cuenta:</p><a href="php/register.php" alt="Boton para registrarse">Registro</a>
-        </section>
+        <!--<section id="div_create">
+           
+        </section>-->
     </main>
+
+    <!--SCRIPT JS PARA ICONOS-->
+    <script src="https://kit.fontawesome.com/c838166335.js" crossorigin="anonymous"></script>
 </body>
 </html>
