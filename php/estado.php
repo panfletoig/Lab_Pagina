@@ -63,7 +63,7 @@ $revisar = $db->querySingle("SELECT pass FROM Usuario WHERE email = '$emailSessi
                         echo "
                         <label>Serial: $selectSerial</label>
                         <label>Nombre: $nombreP</label>
-                        <label>Serial: $descripcionP</label>
+                        <label>Descripción: $descripcionP</label>
                         ";
                         echo "<h3>Fecha de salida: </h3>
                         <input type='date' name=date id=date required>
