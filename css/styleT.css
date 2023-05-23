@@ -1,0 +1,73 @@
+@import url(https://fonts.googleapis.com/css?family=Rubik:300,regular,500,600,700,800,900,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+*{
+    margin: 0;
+    padding: 0;
+}
+html, body{
+    height: 100%;
+    font-family: 'Rubik';
+}
+h1{
+    text-align: center;
+    padding: 20px 0;
+}
+form, a{
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+input{
+    margin: 10px 0;
+}
+#submit, a{
+    width: 80px;
+}
+a{
+    text-decoration: none;
+    margin-top: 10px;
+}
+section{
+    text-align: center;
+}
+table{
+    text-align: center;
+    margin: 10px auto;
+}
+td{
+    padding: 0 10px;
+}
+#a_admin, #close{
+    text-decoration: none;
+    margin: 0 0 0 auto;
+}
+#f_btn{
+    width: 100%;
+}
+#div_create{
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+#div_create *{
+    width: auto;
+    margin: 0 10px;
+    vertical-align: middle;
+    text-decoration: solid blue;
+}
+#div_btn, #div_btn form{
+    width: auto;
+    direction: ltr;
+    display: flex;
+    justify-content: flex-end;
+}
+#div_btn > * , #div_btn input{
+    margin: 0;
+    width: 200px;
+}
+td, th, table{
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}

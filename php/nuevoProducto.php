@@ -15,7 +15,8 @@
     $selectSerial = $_POST['serial'] ?? null;
 
     $nombreMarca = $_POST['nombreMarca'] ?? null;
-    $nombreUbicacion = $_POST['nombreUbicacion'] ?? null;
+    $nombreUbicacion = $_POST['nombreUbicación'] ?? null;
+    $nombreModelo = $_POST['nombreModelo'] ?? null;
 
     $revisar = $db->querySingle("SELECT pass FROM Usuario WHERE email = '$emailSession'");
 ?>
@@ -26,7 +27,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar producto</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/styleT.css">
 </head>
 <body>
     <header>
@@ -70,6 +71,10 @@
 
 
                         if($bool){
+                            $selectSerial = intval($selectSerial);
+                            $selectEstado = intval($selectEstado);
+                            $selectMarca = intval($selectMarca);
+                            $selectUbicacion = intval($selectUbicacion);
                             $db->exec("INSERT INTO Productos (nombre, descripcion, modelo, serializado, id_estado, id_marca, id_bodega) VALUES ('$textNombre', '$textDescripcion', '$selectModelo', '$selectSerial', '$selectEstado', '$selectMarca', '$selectUbicacion')");
                             echo "<p>Producto: $textNombre agregado</p>";
                         }
@@ -94,13 +99,7 @@
         <section>
             <?php
                 if(password_verify($passSession, $revisar)){
-                    echo "<br><h2>Agregar marca:</h2>";
-                    echo "
-                    <form method=post action=nuevoProducto.php>
-                    <h3>Nombre:</h3>
-                    <input type=text placeholder='Nombre de la marca' name=nombreMarca required autocomplete=off>
-                    <input type=submit value=Agregar name='agregarMarca'>
-                    </form>";
+                    agregar("Marca");
                     $ultimaMarca = $db->querySingle("SELECT marca FROM Marca WHERE id_marca = (SELECT MAX(id_marca)FROM Marca)");
                     $existe = $db->querySingle("SELECT EXISTS(SELECT * from Marca WHERE marca = '$nombreMarca')");
                     if($nombreMarca != '' && isset($_REQUEST['agregarMarca']) && $existe != 1){
@@ -108,7 +107,7 @@
                         echo '<meta http-equiv="refresh" content="0; url=nuevoProducto.php" />';
                     }
                     else if($existe == 1)
-                    echo "<p>Esta marca ya existe</p>";
+                        echo "<p>Esta marca ya existe</p>";
                     echo "<p>Ultima marca añadida: $ultimaMarca</p>";
                 }
             ?>
@@ -116,16 +115,11 @@
         <section>
             <?php
                 if(password_verify($passSession, $revisar)){
-                    echo "<br><h2>Agregar ubicación:</h2>";
-                    echo "
-                    <form method=post action=nuevoProducto.php>
-                    <h3>Nombre:</h3>
-                    <input type=text placeholder=Ubicación name=nombreUbicacion required autocomplete=off>
-                    <input type=submit value=Agregar name='agregarUbicacion'>
-                    </form>";
+                    agregar("Ubicación");
 
                     $ultimaUbicacion = $db->querySingle("SELECT ubicacion FROM Bodega WHERE id_bodega = (SELECT MAX(id_bodega)FROM Bodega)");
                     $existe = $db->querySingle("SELECT EXISTS(SELECT * from Bodega WHERE ubicacion = '$nombreUbicacion')");
+                    
                     if($nombreUbicacion != '' && isset($_REQUEST['agregarUbicacion']) && $existe != 1){
                         $db->exec("INSERT INTO Bodega (ubicacion) VALUES ('$nombreUbicacion')");
                         echo '<meta http-equiv="refresh" content="0; url=nuevoProducto.php" />';
@@ -136,6 +130,36 @@
                 }
             ?>
         </section>
+        <section>
+            <?php
+                if(password_verify($passSession, $revisar)){
+                    agregar("Modelo");
+
+                    $ultimaModelo = $db->querySingle("SELECT modelo FROM Modelo WHERE id_modelo = (SELECT MAX(id_modelo)FROM Modelo)");
+                    $existe = $db->querySingle("SELECT EXISTS(SELECT * from Modelo WHERE modelo = '$nombreModelo')");
+                    
+                    if($nombreModelo != '' && isset($_REQUEST['agregarModelo']) && $existe != 1){
+                        $db->exec("INSERT INTO Modelo (modelo) VALUES ('$nombreModelo')");
+                        echo '<meta http-equiv="refresh" content="0; url=nuevoProducto.php" />';
+                    }
+                    else if($existe == 1)
+                        echo "<p>Este Modelo ya existe</p>";
+                    echo "<p>Ultimo modelo añadido: $ultimaModelo</p>";
+                }
+            ?>
+        </section>
+        
     </main>
 </body>
 </html>
+<?php
+    function agregar($nombreAgregar){
+        echo "<br><h2>Agregar $nombreAgregar:</h2>";
+        echo "<form method=post action=nuevoProducto.php>
+        <h3>Nombre:</h3>
+        <input type=text placeholder=$nombreAgregar name=nombre$nombreAgregar required autocomplete=off>
+        <input type=submit value=Agregar name='agregar$nombreAgregar'>
+        </form>
+        ";
+    }
+?>

@@ -32,7 +32,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventario</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/styleT.css">
 </head>
 <body>
     <header>
@@ -43,8 +43,6 @@
                     echo "<a href=admin.php id=a_admin><button>Panel de administrador</button></a>";
                 }
                 echo "<a href=nuevoProducto.php id=a_admin><button>Agregar Producto</button></a>";
-                echo "<a href=estado.php id=a_admin><button>Actualizar Estado</button></a>";
-                echo "<a href=delete.php id=a_admin><button>Eliminar Producto</button></a>";
                 echo "<form action=mainInventario.php method=post id=f_btn><input type=submit value='Cerrar sesión' name=close id=close></form>";
             }
             ?>       
@@ -306,7 +304,7 @@
                     
                     */
                     $a = 0;
-                    $b = 8;
+                    $b = 9;
                     $c = 0;
                     $estadoSelect = $db->query("SELECT * FROM Estado");
                     $marcaSelect = $db->query("SELECT * FROM Marca");
@@ -332,14 +330,16 @@
                     */
                     echo "<table>";
                     echo "<tr>
-                    <td>Serial:</td>
-                    <td>Nombre:</td>
-                    <td>Descripción:</td>
-                    <td>Modelo:</td>
-                    <td>Estado:</td>
-                    <td>Marca:</td>
-                    <td>Ubicación:</td>
-                    <td>Fecha salida:</td>
+                    <th>Opciones</th>
+                    <th>Serial:</th>
+                    <th>Nombre:</th>
+                    <th>Descripción:</th>
+                    <th>Modelo:</th>
+                    <th>Estado:</th>
+                    <th>Marca:</th>
+                    <th>Ubicación:</th>
+                    <th>Salida:</th>
+                    <th>OC:</th>
                     </tr>";
 
                     while ($row = $productosSelect->fetchArray(SQLITE3_ASSOC)) {
@@ -370,6 +370,24 @@
                                     break;
                             }
                             if($a != 3 && $a != 4 && $a != 5 && $a != 6){
+                                if($a == 0){
+                                    echo "<td>
+                                    <form method=post action=estado.php id=formInput>
+                                        <input type=hidden name=hidden value=$rows>
+                                        <input type=submit value=Actualizar id=idInput>
+                                    </form>";
+
+                                    $estadoSelect = $db->querySingle("SELECT id_estado FROM Productos WHERE serializado = '$rows'");
+
+                                    if($estadoSelect == 2 || $estadoSelect == 4){
+                                        echo "<form method=post action=delete.php id=formInput>
+                                            <input type=hidden name=hidden value=$rows>
+                                            <input type=submit value=Eliminar id=idInput>
+                                        </form>";
+                                    }
+
+                                    echo "</td>";
+                                }
                                 echo "<td>$rows</td>";
                             }
                             $a++;
