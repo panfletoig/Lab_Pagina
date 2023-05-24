@@ -13,6 +13,7 @@
     $selectUbicacion = $_POST['selectUbicación'] ?? null;
     $selectModelo = $_POST['selectModelo'] ?? null;
     $selectSerial = $_POST['serial'] ?? null;
+    $ordenCompra = $_POST['OC'] ?? null;
 
     $nombreMarca = $_POST['nombreMarca'] ?? null;
     $nombreUbicacion = $_POST['nombreUbicación'] ?? null;
@@ -47,9 +48,12 @@
                     $marcaSelect = $db->query("SELECT * FROM Marca");
                     $bodegaSelect = $db->query("SELECT * FROM Bodega");
                     $modeloSelect = $db->query("SELECT * FROM Modelo");
+                    
                     //creamos un form
                     echo "
                     <form method=post action=nuevoProducto.php>
+                    <h3>Serial:</h3>
+                    <input type=text placeholder=Serial name=serial required autocomplete=off>
                     <h3>Nombre:</h3>
                     <input type=text placeholder=Nombre name=nombre required autocomplete=off>
                     <h3>Descripción:</h3>
@@ -58,9 +62,11 @@
                     <select name=selectEstado id=select>
                     <option value=1>Entrada de equipo nuevo</option>
                     <option value=3>Entrada de equipo usado</option>
-                    </select>";
+                    </select>
+                    <h3>Orden de compra:</h3>
+                    <input type=text placeholder='Orden de compra' name=OC autocomplete=off>";
+                    
                     select("Modelo", $modeloSelect, 2, 1, 0, true);
-                    echo "<h3>Serial:</h3><input type=text placeholder=Serial name=serial required autocomplete=off>";
                     select("Marca", $marcaSelect, 2, 1, 0, true);
                     select("Ubicación", $bodegaSelect, 2, 1, 0, true);
                     echo "<input type=submit value='Agregar' name='agregarProducto'></form>";
@@ -68,15 +74,24 @@
                     if(isset($_REQUEST['agregarProducto'])){
                         $comprobar =  $db->querySingle("SELECT EXISTS(SELECT * from Productos WHERE serializado = '$selectSerial')");
                         $bool = (($selectUbicacion != "0" && $marcaSelect != "0" && $selectEstado != "0" && $textNombre != '' && $textDescripcion != '' && $selectModelo != "0" && $selectSerial != '') && $comprobar == 0) == true ? true : false;
-
+                        
 
                         if($bool){
                             $selectSerial = intval($selectSerial);
                             $selectEstado = intval($selectEstado);
                             $selectMarca = intval($selectMarca);
                             $selectUbicacion = intval($selectUbicacion);
-                            $db->exec("INSERT INTO Productos (nombre, descripcion, modelo, serializado, id_estado, id_marca, id_bodega) VALUES ('$textNombre', '$textDescripcion', '$selectModelo', '$selectSerial', '$selectEstado', '$selectMarca', '$selectUbicacion')");
-                            echo "<p>Producto: $textNombre agregado</p>";
+                            if($selectEstado == 1 && $ordenCompra != ''){
+                                $db->exec("INSERT INTO Productos (nombre, descripcion, modelo, serializado, id_estado, id_marca, id_bodega, OC) VALUES ('$textNombre', '$textDescripcion', '$selectModelo', '$selectSerial', '$selectEstado', '$selectMarca', '$selectUbicacion', '$ordenCompra')");
+                                echo "<p>Producto: $textNombre agregado</p>";
+                            }
+                            else if ($selectEstado == 3){
+                                $db->exec("INSERT INTO Productos (nombre, descripcion, modelo, serializado, id_estado, id_marca, id_bodega, OC) VALUES ('$textNombre', '$textDescripcion', '$selectModelo', '$selectSerial', '$selectEstado', '$selectMarca', '$selectUbicacion', '$ordenCompra')");
+                                echo "<p>Producto: $textNombre agregado</p>";
+                            }
+                            else{
+                                echo "<p>Se requiere una orden de compra</p>";
+                            }
                         }
                         else if($selectUbicacion == '0'){
                             echo "<p>Campo ubicación vacio</p>";
@@ -90,8 +105,6 @@
                         else if($selectEstado == '0'){
                             echo "<p>Campo estado vacio</p>";
                         }
-                        else if(($nombreExiste == $textNombre && $descripcionExiste == $textDescripcion && $id_estadoExiste == $estadoSelect && $id_marcaExiste == $marcaSelect && $id_bodegaExiste == $bodegaSelect))
-                        echo "<p>Este producto ya existe</p>";
                     }
                 }
             ?>

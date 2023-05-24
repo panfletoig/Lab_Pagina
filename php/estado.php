@@ -7,7 +7,7 @@ $emailSession = $_SESSION['email'] ?? null;
 $passSession = $_SESSION['pass'] ?? null;
 $selectSerial = $_POST['hidden'] ?? null;
 $date = $_POST['date'] ?? null;
-$ordenCompra = $_POST['ordenCompra'] ?? null;
+
 $confirmacion = $_POST['confirmacion'] ?? null;
 
 $revisar = $db->querySingle("SELECT pass FROM Usuario WHERE email = '$emailSession'");
@@ -48,7 +48,7 @@ $revisar = $db->querySingle("SELECT pass FROM Usuario WHERE email = '$emailSessi
                         if($comprobacion == 1 || $comprobacion == 3){
                             $id_estado = $db->querySingle("SELECT id_estado FROM Productos WHERE serializado = '$selectSerial'");
                             $id_estado = 1 + intval($id_estado);
-                            $db->exec("UPDATE Productos SET id_estado = '$id_estado', FechaSalida = '$date', OC = '$ordenCompra' WHERE serializado = '$selectSerial';");
+                            $db->exec("UPDATE Productos SET id_estado = '$id_estado', FechaSalida = '$date' WHERE serializado = '$selectSerial';");
                             echo "<p>Producto: $selectSerial actualizado</p>";
                             echo "<a href='mainInventario.php'><button>Volver</button></a>";
                         }
@@ -67,8 +67,6 @@ $revisar = $db->querySingle("SELECT pass FROM Usuario WHERE email = '$emailSessi
                         ";
                         echo "<h3>Fecha de salida: </h3>
                         <input type='date' name=date id=date required>
-                        <h3>Orden de compra<h3>
-                        <input type=text name=ordenCompra placeholder='Orden de compra' required autocomplete=off>
                         <input type=hidden name=hidden value=$selectSerial>
                         <input type=hidden name=confirmacion value=confirmacion>
                         <input type=submit value='Agregar' name='agregarProducto'></form>";
