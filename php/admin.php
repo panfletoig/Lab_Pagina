@@ -127,18 +127,21 @@
                         $nameBackup = 'backups/' . $_POST['nameBackup']. ".db";
                         $backup = new SQLite3($nameBackup);
                         $db->backup($backup);
-
+                        
                         echo "<p>Copia de seguridad realizada</p>";
                     }
                     
                     echo "<br><h3>Cargar copia de seguridad</h3>";
-                    echo "<form method=post><input type=text name=bknombre placeholder='Nombre' required autocomplete=off><input type=submit name=backup value='Backup'></form>";
+                    echo "<form method=post>
+                    <select name=bknombre required>";
+                        obtener_estructura_directorios("backups");
+                    echo "</select>
+                    <input type=submit name=backup value='Cargar backup'>
+                    </form>";
                     if(isset($_REQUEST['backup'])){
-                        $nameBackup = 'backups/' . $_POST['bknombre'] . ".db";
-                        echo "<p>Copia de seguridad cargada</p>";
-                        if(!copy($nameBackup,"../php/usuario.db")){
-                            //echo "Error al copiar $nameBackup...\n";
-                        }
+                        $nameBackup = 'backups/' . $_POST['bknombre'];
+                        echo "<p>Copia de seguridad cargada: $nameBackup</p>";
+                        copy($nameBackup,"../php/usuario.db");
                     }
                 }
                 else{
@@ -150,3 +153,26 @@
     </main>
 </body>
 </html>
+
+<?php
+    function obtener_estructura_directorios($ruta){
+        // Se comprueba que realmente sea la ruta de un directorio
+        if (is_dir($ruta)){
+            // Abre un gestor de directorios para la ruta indicada
+            $gestor = opendir($ruta);
+
+            // Recorre todos los elementos del directorio
+            while (($archivo = readdir($gestor)) !== false)  {
+                // Se muestran todos los archivos y carpetas excepto "." y ".."
+                if ($archivo != "." && $archivo != "..") {
+                    echo "<option value=$archivo>" . $archivo . "</option>";
+                }
+            }
+            
+            // Cierra el gestor de directorios
+            closedir($gestor);
+        } else {
+            echo "No es una ruta de directorio valida<br/>";
+        }
+    }
+?>
