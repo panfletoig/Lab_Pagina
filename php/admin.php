@@ -143,6 +143,32 @@
                         echo "<p>Copia de seguridad cargada: $nameBackup</p>";
                         copy($nameBackup,"../php/usuario.db");
                     }
+
+                    echo "<br><h3>Descargar copia de seguridad</h3>";
+                    echo "<form method=post>
+                    <select name=downloadSelect required>";
+                        obtener_estructura_directorios("backups");
+                    echo "</select>
+                    <input type=submit name=download value='descargar'>
+                    </form>";
+
+                    if(isset($_REQUEST['download'])){
+                        $download = 'backups/' . $_POST['downloadSelect'];
+                        echo "<p>Copia de seguridad lista para descargar: <a href='$download'>Descargar</a></p>";
+                    }
+
+                    echo "<br><h3>Subir copia de seguridad</h3>";
+                    echo "<form method=post enctype='multipart/form-data'>
+                    <input type=file name=subir_archivo accept='.db'>
+                    <input type=submit name=upload value='descargar'>
+                    </form>";
+
+                    if(isset($_REQUEST['upload'])){
+                        $directorio = "backups/";
+                        $subir_archivo = $directorio.basename($_FILES['subir_archivo']['name']);
+                        move_uploaded_file($_FILES['subir_archivo']['tmp_name'], $subir_archivo);
+                        echo "<p>Se ha subido el archivo</p>";
+                    }
                 }
                 else{
                     echo "<h4>No deberias estar aqui :/</h4>";
