@@ -112,6 +112,34 @@
                         $db->exec("DELETE FROM Usuario WHERE id_usuario = $selectId");
                         echo '<meta http-equiv="refresh" content="0; url=admin.php" />';
                     }
+
+                    echo "<br><h3>Eliminar inventario</h3>";
+                    echo "<form method=post><input type=submit name=delete value='Eliminar Inventario'></form>";
+
+                    if(isset($_REQUEST['delete'])){
+                        $db->exec("DELETE FROM Productos");
+                        echo "<p>Inventario eliminado</p>";
+                    }
+
+                    echo "<br><h3>Realizar copia de seguridad</h3>";
+                    echo "<form method=post><input type=text name=nameBackup placeholder='Nombre' required autocomplete=off><input type=submit name=copiaSeguridad value='Copia de seguridad'></form>";
+                    if(isset($_REQUEST['copiaSeguridad'])){
+                        $nameBackup = 'backups/' . $_POST['nameBackup']. ".db";
+                        $backup = new SQLite3($nameBackup);
+                        $db->backup($backup);
+
+                        echo "<p>Copia de seguridad realizada</p>";
+                    }
+                    
+                    echo "<br><h3>Cargar copia de seguridad</h3>";
+                    echo "<form method=post><input type=text name=bknombre placeholder='Nombre' required autocomplete=off><input type=submit name=backup value='Backup'></form>";
+                    if(isset($_REQUEST['backup'])){
+                        $nameBackup = 'backups/' . $_POST['bknombre'] . ".db";
+                        echo "<p>Copia de seguridad cargada</p>";
+                        if(!copy($nameBackup,"../php/usuario.db")){
+                            //echo "Error al copiar $nameBackup...\n";
+                        }
+                    }
                 }
                 else{
                     echo "<h4>No deberias estar aqui :/</h4>";
