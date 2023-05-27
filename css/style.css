@@ -107,6 +107,7 @@ td{
     display: flex;
     align-items: center;
     text-align: center;
+	height: 600px;
 }
 
 form {
@@ -128,7 +129,7 @@ form {
 	position: relative;
     display: grid;
     grid-template-columns: 7% 93%;
-    margin: 25px 0;
+    margin: 0;
     padding: 5px 0;
     border-bottom: 2px solid #d9d9d9;
 }

@@ -32,7 +32,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
-    <link rel="stylesheet" href="../css/styleT.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <header>
@@ -40,19 +40,81 @@
     </header>
     <main>
         <section>
-            <form action="register.php" id="form" method="post">
-                <label>Correo</label>
-                <input type="text" name="correoUsuario" placeholder="Correo" required>
-                <label>Nombre</label>
-                <input type="text" name="nombreUsuario" placeholder="Nombre" maxlength="50" required>
-                <label>Contraseña</label>
-                <input type="password" name="passUsuario" placeholder="Contraseña" required>
-                <label>Repetir Contraseña</label>
-                <input type="password" name="repetirUsuario" placeholder="Contraseña" required>
-                <label>Código</label>
-                <input type="text" name="codeUsuario" placeholder="Código" required autocomplete="off">
-                <input id="submit" type="submit" value="Registrarse">
-            </form>
+
+            <img class="wave" src="../img/wave.png" alt="wave">
+            
+            <div class="container">
+                <div class="img">
+                    <img src="../img/programming.svg" alt="programming">
+                </div>
+
+                <div class="login-content">
+                    <form action="register.php" id="form" method="post">
+                    <img src="../img/avatar.svg" alt="avatar">
+
+                    <div class="input-div user">
+                        <div class="i">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div class="div">
+                            <input type="text" name="correoUsuario" placeholder="Usuario" required>
+                        </div>
+                    </div>
+                    
+                    <div class="input-div user">
+                        <div class="i">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div class="div">
+                            <input type="text" name="nombreUsuario" placeholder="Nombre" maxlength="50" required>
+                        </div>
+                    </div> 
+
+                    <div class="input-div pass">
+        
+                        <div class="i">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+
+                        <div class="div">
+                            <input type="password" name="passUsuario" placeholder="Contraseña" required>
+                        </div>
+                        
+                    </div>
+
+                    <div class="input-div pass">
+        
+                        <div class="i">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+
+                        <div class="div">
+                            <input type="password" name="repetirUsuario" placeholder="Contraseña" required>
+                        </div>
+                        
+                    </div>
+
+                    <div class="input-div pass">
+        
+                        <div class="i">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+
+                        <div class="div">
+                            <input type="text" name="codeUsuario" placeholder="Código" required autocomplete="off">
+                        </div>
+                        
+                    </div>
+
+                    
+
+                    
+                    <a href="../login.html"> Iniciar sesión</a>
+                    <input class="btn" id="submit" type="submit" value="Registrarse">
+                    </form>
+                </div>
+            </div>
+            
         </section>
         <section>
             <?php    
@@ -104,9 +166,9 @@
                     echo "<p>El codigo ingresado es incorrecto o inexistente</p>";
             ?>
         </section>
-        <section id="div_create">
-            <p>Ya tengo una cuenta: </p><a href="../login.html"> Iniciar sesión</a>
-        </section>
+
+        <!--SCRIPT JS PARA ICONOS-->
+        <script src="https://kit.fontawesome.com/c838166335.js" crossorigin="anonymous"></script>
     </main>
 </body>
 </html>
