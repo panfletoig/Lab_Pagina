@@ -32,11 +32,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventario</title>
-    <link rel="stylesheet" href="../css/styleT.css">
+    <link rel="stylesheet" href="../css/styleInventario.css">
 </head>
 <body>
     <header>
-        <div id="div_btn">
+        <div id="btn_admin">
             <?php
             if(password_verify($passSession, $revisar)){
                 if($nivel == 1){
@@ -51,6 +51,7 @@
         <h1>Inventario</h1>
     </header>
     <main>
+        <img class="wave" src="../img/wave.png" alt="wave">
         <section>
             <?php
                 
@@ -328,7 +329,7 @@
                     mientras que el while se encarga de pasar por cada campo,
                     comprobando en donde le toca ir a cada campo y agregandolo en una tabla
                     */
-                    echo "<table>";
+                    echo "<br><table>";
                     echo "<tr>
                     <th>Opciones</th>
                     <th>Serial:</th>
@@ -408,6 +409,7 @@
                 }
             ?>         
         </section>
+        <br><br>
     </main>
 </body>
 </html>

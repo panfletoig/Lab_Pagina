@@ -22,13 +22,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verificacion</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/styleAdmin.css">
 </head>
 <body>
     <header>
         <h1>Acceso</h1>
     </header>
     <main>
+    <img class="wave" src="../img/wave.png" alt="wave">
         <section>
             <?php
                 //result: variable usada para el almacenamiento de datos en este caso de un select

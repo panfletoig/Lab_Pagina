@@ -28,7 +28,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar producto</title>
-    <link rel="stylesheet" href="../css/styleT.css">
+    <link rel="stylesheet" href="../css/styleAgregar.css">
 </head>
 <body>
     <header>
@@ -36,6 +36,7 @@
         <h1>Agregar Producto</h1>
     </header>
     <main>
+        <img class="wave" src="../img/wave.png" alt="wave">
         <section>
             <h2>Producto:</h2>
             <?php
@@ -167,7 +168,7 @@
 </html>
 <?php
     function agregar($nombreAgregar){
-        echo "<br><h2>Agregar $nombreAgregar:</h2>";
+        echo "<br><br><h2>Agregar $nombreAgregar:</h2><br>";
         echo "<form method=post action=nuevoProducto.php>
         <h3>Nombre:</h3>
         <input type=text placeholder=$nombreAgregar name=nombre$nombreAgregar required autocomplete=off>

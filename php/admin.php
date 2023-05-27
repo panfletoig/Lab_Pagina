@@ -18,19 +18,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
-    <link rel="stylesheet" href="../css/styleT.css">
+    <link rel="stylesheet" href="../css/styleAdmin.css">
 </head>
 <body>
     <header>
-        <div id=btn_admin><a href=mainInventario.php id=a_admin><button>Volver</button></a></div>
+        <div id=btn_admin><a href=mainInventario.php id=a_admin><button class ="up">Volver</button></a></div>
         <h1>Panel de administrador</h1>
     </header>
     <main>
+        <img class="wave" src="../img/wave.png" alt="wave">
         <section>
             <?php
                 if(password_verify($passSession, $revisar) && $nivel == 1){
                     $result = $db->query("SELECT * FROM Usuario");
 
+                    echo "<h1>Trabajadores</h1>";
                     echo "<table>";
                     echo "<tr>
                     <td>ID:     </td>
@@ -67,10 +69,10 @@
                     echo "</table>";
 
                     echo "<br><h3>Generar codigo para trabajador</h3>";
-                    echo "<form method=post><input type=submit name=generar value='Generar codigo para trabajador'></form>";
+                    echo "<form method=post><input type=submit class='up' name=generar value='Generar codigo para trabajador'></form>";
 
                     echo "<br><h3>Generar codigo para administrador</h3>";
-                    echo "<form method=post><input type=submit name=generarA value='Generar codigo para administrador'></form>";
+                    echo "<form method=post><input type=submit class='up' name=generarA value='Generar codigo para administrador'></form>";
 
                     
                     if(isset($_REQUEST['generar'])){
@@ -105,7 +107,7 @@
                             $temporal++;
                         }
                     }
-                    echo "</select><input type=submit name=eliminar value='Eliminar'></form>";
+                    echo "</select><input type=submit class='up' name=eliminar value='Eliminar'></form>";
                     
 
                     if(isset($_REQUEST['eliminar'])){
@@ -113,8 +115,9 @@
                         echo '<meta http-equiv="refresh" content="0; url=admin.php" />';
                     }
 
+                    echo "<br><br><h1>Controles de inventario</h1>";
                     echo "<br><h3>Eliminar inventario</h3>";
-                    echo "<form method=post><input type=submit name=delete value='Eliminar Inventario'></form>";
+                    echo "<form method=post><input type=submit class='up' name=delete value='Eliminar Inventario'></form>";
 
                     if(isset($_REQUEST['delete'])){
                         $db->exec("DELETE FROM Productos");
@@ -122,7 +125,7 @@
                     }
 
                     echo "<br><h3>Realizar copia de seguridad</h3>";
-                    echo "<form method=post><input type=text name=nameBackup placeholder='Nombre' required autocomplete=off><input type=submit name=copiaSeguridad value='Copia de seguridad'></form>";
+                    echo "<form method=post><input type=text name=nameBackup placeholder='Nombre' required autocomplete=off><input type=submit class='up' name=copiaSeguridad value='Copia de seguridad'></form>";
                     if(isset($_REQUEST['copiaSeguridad'])){
                         $nameBackup = 'backups/' . $_POST['nameBackup']. ".db";
                         $backup = new SQLite3($nameBackup);
@@ -136,7 +139,7 @@
                     <select name=bknombre required>";
                         obtener_estructura_directorios("backups");
                     echo "</select>
-                    <input type=submit name=backup value='Cargar backup'>
+                    <input type=submit class='up' name=backup value='Cargar backup'>
                     </form>";
                     if(isset($_REQUEST['backup'])){
                         $nameBackup = 'backups/' . $_POST['bknombre'];
@@ -149,7 +152,7 @@
                     <select name=downloadSelect required>";
                         obtener_estructura_directorios("backups");
                     echo "</select>
-                    <input type=submit name=download value='descargar'>
+                    <input type=submit class='up' name=download value='Descargar'>
                     </form>";
 
                     if(isset($_REQUEST['download'])){
@@ -159,8 +162,8 @@
 
                     echo "<br><h3>Subir copia de seguridad</h3>";
                     echo "<form method=post enctype='multipart/form-data'>
-                    <input type=file name=subir_archivo accept='.db'>
-                    <input type=submit name=upload value='descargar'>
+                    <input type=file id='nothing' name=subir_archivo accept='.db'>
+                    <input type=submit class='up' name=upload value='Subir'>
                     </form>";
 
                     if(isset($_REQUEST['upload'])){

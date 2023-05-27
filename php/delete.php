@@ -18,14 +18,15 @@ $revisar = $db->querySingle("SELECT pass FROM Usuario Where email = '$email'");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../css/styleT.css">
+    <link rel="stylesheet" href="../css/styleAdmin.css">
 </head>
 <body>
     <header>
-        <div id="div_btn"><a href="mainInventario.php"><button>Volver</button></a></div>
+        <div id="btn_admin"><a href="mainInventario.php"><button>Volver</button></a></div>
         <h1>Eliminar producto</h1>
     </header>
     <main>
+        <img class="wave" src="../img/wave.png" alt="wave">
         <section>
             <?php
                 if(!password_verify($pass, $revisar))

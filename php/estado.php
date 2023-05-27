@@ -19,7 +19,7 @@ $revisar = $db->querySingle("SELECT pass FROM Usuario WHERE email = '$emailSessi
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actualizar Estado</title>
-    <link rel="stylesheet" href="../css/styleT.css">
+    <link rel="stylesheet" href="../css/styleAdmin.css">
 </head>
 <body>
     <header>
@@ -31,6 +31,7 @@ $revisar = $db->querySingle("SELECT pass FROM Usuario WHERE email = '$emailSessi
         <h1>Actualizar estado de producto</h1>
     </header>
     <main>
+        <img class="wave" src="../img/wave.png" alt="wave">
         <section>
             <?php
                 if(!password_verify($passSession, $revisar)){
@@ -61,11 +62,11 @@ $revisar = $db->querySingle("SELECT pass FROM Usuario WHERE email = '$emailSessi
                         
                         echo "<form method=post action=estado.php>";
                         echo "
-                        <label>Serial: $selectSerial</label>
-                        <label>Nombre: $nombreP</label>
-                        <label>Descripción: $descripcionP</label>
+                        <label>Serial: $selectSerial</label> <br>
+                        <label>Nombre: $nombreP</label> <br>
+                        <label>Descripción: $descripcionP</label> <br>
                         ";
-                        echo "<h3>Fecha de salida: </h3>
+                        echo "<br><h3>Fecha de salida: </h3>
                         <input type='date' name=date id=date required>
                         <input type=hidden name=hidden value=$selectSerial>
                         <input type=hidden name=confirmacion value=confirmacion>
